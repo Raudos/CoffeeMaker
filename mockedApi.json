@@ -1,0 +1,79 @@
+{
+  "stock": [
+    {
+      "id": 1,
+      "name": "1",
+      "stock": 100,
+      "price": [
+        {
+          "code": "USD",
+          "cost": 4
+        },
+        {
+          "code": "PLN",
+          "cost": 16
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "2",
+      "stock": 100,
+      "price": [
+        {
+          "code": "USD",
+          "cost": 3
+        },
+        {
+          "code": "PLN",
+          "cost": 12
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "3",
+      "stock": 100,
+      "price": [
+        {
+          "code": "USD",
+          "cost": 2
+        },
+        {
+          "code": "PLN",
+          "cost": 8
+        }
+      ]
+    }
+  ],
+  "beverages": [
+    {
+      "id": 1,
+      "name": "1",
+      "ingredients": [
+        {
+          "id": 1,
+          "amount": 3
+        },
+        {
+          "id": 2,
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "2",
+      "ingredients": [
+        {
+          "id": 1,
+          "amount": 5
+        },
+        {
+          "id": 2,
+          "amount": 2
+        }
+      ]
+    }
+  ]
+}
