@@ -1,39 +1,66 @@
-import { BeverageData } from "./interfaces/BeverageData";
-import { Beverage as IBeverage } from './interfaces/Beverage';
-import { BeverageIngredientsFactory } from "./BeverageIngredientsFactory";
-import { Ingredient as IIngredient } from "../Ingredient/interfaces/Ingredient";
+import {BeverageData} from "./interfaces/BeverageData";
+import {Beverage as IBeverage} from './interfaces/Beverage';
+import {BeverageIngredientsFactory} from "./BeverageIngredientsFactory";
+import {Ingredient as IIngredient} from "../Ingredient/interfaces/Ingredient";
 import {CurrencyCode} from "../../utils/currencies/interfaces/CurrencyCode";
 import {IngredientData} from "../Ingredient/interfaces/IngredientData";
+import {BeveragePrice} from "./interfaces/BeveragePrice";
 
 export class Beverage implements IBeverage {
   public ingredients: IIngredient[];
   public name: string;
   private id: number;
+  public prices: BeveragePrice[];
+  public canBeBrewed: boolean;
 
-  constructor({ id, name, ingredients }: BeverageData, ingredientApiData: IngredientData[]) {
+  constructor({ id, name, ingredients, prices }: BeverageData, ingredientApiData: IngredientData[]) {
     this.id = id;
     this.name = name;
+    this.prices = prices;
     this.ingredients = BeverageIngredientsFactory(ingredients, ingredientApiData);
+    this.canBeBrewed = this.isBrewable(ingredientApiData);
   }
 
-  getPrice = (currencyCode: CurrencyCode, skipCurrencySuffix: boolean = false) => {
-    const totalPrice = this.ingredients.reduce((prev, curr) => {
-      return prev + curr.getPrice(currencyCode);
-    }, 0);
+  public getPrice = (currencyCode: CurrencyCode) => {
+    const price = this.prices.find((price) => price.code === currencyCode);
 
-    if (!skipCurrencySuffix) {
-      return `${totalPrice} ${this.getCurrencyCodeSuffix}`;
+    if (price) {
+      return `${price.cost} ${this.getCurrencyCodeSuffix(currencyCode)}`;
     }
 
-    return `${totalPrice}`;
+    const defaultPrice = this.prices.find((price) => price.code === CurrencyCode.USD);
+    if (defaultPrice) {
+      return `${defaultPrice.cost} ${this.getCurrencyCodeSuffix(CurrencyCode.USD)}`;
+    }
+
+    throw new Error(`Could not get price for ${this.name}`);
   };
 
-  getCurrencyCodeSuffix = (currencyCode: CurrencyCode) => {
+  public getCurrencyCodeSuffix = (currencyCode: CurrencyCode) => {
     switch (currencyCode) {
       case (CurrencyCode.PLN):
         return 'zł';
       default:
         return '$';
     }
-  }
+  };
+
+  private isBrewable = (ingredientsStock: IIngredient[] | []) => {
+    for (let i = 0; i < this.ingredients.length; i++) {
+      const interatedIngredient = this.ingredients[i];
+      const matchedIngredient = ingredientsStock.find(({ id }) => id === interatedIngredient.id);
+
+      if (matchedIngredient && matchedIngredient.stock >= interatedIngredient.stock) {
+        continue;
+      }
+
+      return false;
+    }
+
+    return true;
+  };
+
+  public updateCanBeBrewedStatus = (ingredientsStock: IIngredient[] | []): void => {
+    this.canBeBrewed = this.isBrewable(ingredientsStock);
+  };
 }

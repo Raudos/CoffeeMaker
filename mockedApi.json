@@ -2,8 +2,24 @@
   "stock": [
     {
       "id": 1,
-      "name": "1",
-      "stock": 100,
+      "name": "Kawa ",
+      "stock": 100
+    },
+    {
+      "id": 2,
+      "name": "Mleko",
+      "stock": 100
+    },
+    {
+      "id": 3,
+      "name": "Cukier",
+      "stock": 100
+    }
+  ],
+  "beverages": [
+    {
+      "id": 1,
+      "name": "Super Kawa",
       "price": [
         {
           "code": "USD",
@@ -13,12 +29,21 @@
           "code": "PLN",
           "cost": 16
         }
+      ],
+      "ingredients": [
+        {
+          "id": 1,
+          "amountRequired": 3
+        },
+        {
+          "id": 2,
+          "amountRequired": 2
+        }
       ]
     },
     {
       "id": 2,
-      "name": "2",
-      "stock": 100,
+      "name": "Normalna Kawa",
       "price": [
         {
           "code": "USD",
@@ -28,50 +53,19 @@
           "code": "PLN",
           "cost": 12
         }
-      ]
-    },
-    {
-      "id": 3,
-      "name": "3",
-      "stock": 100,
-      "price": [
-        {
-          "code": "USD",
-          "cost": 2
-        },
-        {
-          "code": "PLN",
-          "cost": 8
-        }
-      ]
-    }
-  ],
-  "beverages": [
-    {
-      "id": 1,
-      "name": "1",
+      ],
       "ingredients": [
         {
           "id": 1,
-          "amount": 3
+          "amountRequired": 5
         },
         {
           "id": 2,
-          "amount": 2
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "name": "2",
-      "ingredients": [
-        {
-          "id": 1,
-          "amount": 5
+          "amountRequired": 2
         },
         {
-          "id": 2,
-          "amount": 2
+          "id": 3,
+          "amountRequired": 2
         }
       ]
     }

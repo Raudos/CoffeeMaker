@@ -19,6 +19,7 @@ export const BeveragesList = (props: BeveragesListProps) => (
         <BeverageCard
           key={beverage.name}
           beverage={beverage}
+          pickBeverage={props.pickBeverage}
         />
       ))}
     </Row>

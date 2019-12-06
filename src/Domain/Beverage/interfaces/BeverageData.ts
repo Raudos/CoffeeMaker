@@ -1,7 +1,9 @@
-import { IngredientData } from "../../Ingredient/interfaces/IngredientData";
+import {IngredientAmount} from "../../Ingredient/interfaces/IngredientAmount";
+import {BeveragePrice} from "./BeveragePrice";
 
 export interface BeverageData {
   id: number;
   name: string;
-  ingredients: IngredientData[];
+  prices: BeveragePrice[];
+  ingredients: IngredientAmount[];
 }

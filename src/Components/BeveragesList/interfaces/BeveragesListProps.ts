@@ -2,4 +2,5 @@ import {Beverage as IBeverage} from "../../../Domain/Beverage/interfaces/Beverag
 
 export interface BeveragesListProps {
   beveragesToPick: IBeverage[];
+  pickBeverage: (pickedBeverage: IBeverage) => () => void;
 }

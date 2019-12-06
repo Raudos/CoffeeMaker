@@ -6,16 +6,26 @@ import {IngredientsList} from "./IngredientsList/IngredientsList";
 import Col from "react-bootstrap/Col";
 
 
-export const BeverageCard = (props: BeverageCardProps) => (
-  <Col sm={3}>
-    <Card>
-      <Card.Body>
-        <Card.Title>{props.beverage.name}</Card.Title>
+export const BeverageCard = ({ beverage, pickBeverage }: BeverageCardProps) => {
+  const handlePickBeverage = pickBeverage(beverage);
 
-        <IngredientsList ingredients={props.beverage.ingredients} />
+  return (
+    <Col sm={3}>
+      <Card>
+        <Card.Body>
+          <Card.Title>{beverage.name}</Card.Title>
 
-        <Button variant="primary">Pick Beverage</Button>
-      </Card.Body>
-    </Card>
-  </Col>
-);
+          <IngredientsList ingredients={beverage.ingredients} />
+
+          <Button
+            variant="primary"
+            onClick={handlePickBeverage}
+            disabled={!beverage.canBeBrewed}
+          >
+            Pick Beverage
+          </Button>
+        </Card.Body>
+      </Card>
+    </Col>
+  )
+}

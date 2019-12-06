@@ -1,7 +1,5 @@
-import {CurrencyCode} from "../../../utils/currencies/interfaces/CurrencyCode";
-
 export interface Ingredient {
+  id: number;
   name: string;
   stock: number;
-  getPrice: (currencyCode: CurrencyCode) => number;
 }
