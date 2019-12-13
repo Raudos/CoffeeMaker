@@ -1,14 +1,15 @@
 import React from 'react';
 import { CoffeeMakerProps } from "./interfaces/CoffeeMakerProps";
 import { CoffeeMakerState } from "./interfaces/CoffeeMakerState";
-import HttpClient from "../../utils/httpClient/httpClient";
-import { RequestStatus } from "../../utils/httpClient/interfaces/requestStatus";
+import HttpClient from "../../Utils/httpClient/httpClient";
+import { RequestStatus } from "../../Utils/httpClient/interfaces/requestStatus";
 import { BeverageFactory } from "../../Domain/Beverage/BeverageFactory";
-import { IngredientsFactory } from "../../Domain/Ingredient/IngredientsFactory";
+import { StockIngredientsFactory } from "../../Domain/StockIngredient/StockIngredientsFactory";
 import { UserDisplay } from "../UserDisplay/UserDisplay";
-import {Beverage} from "../../Domain/Beverage/interfaces/Beverage";
-import {updateIngredientsStockApiResponse} from "./mocks/updateIngedientsStockApiResponse";
-import {Ingredient as IIngredient} from "../../Domain/Ingredient/interfaces/Ingredient";
+import { Beverage } from "../../Domain/Beverage/interfaces/Beverage";
+import { updateIngredientsStockApiResponse } from "./mocks/updateIngedientsStockApiResponse";
+import { StockIngredient } from "../../Domain/StockIngredient/interfaces/StockIngredient";
+import { BEVERAGES_LIST, INGREDIENTS_STOCK_LIST } from "../../Consts/apiUrls";
 
 export class CoffeeMaker extends React.Component<CoffeeMakerProps, CoffeeMakerState> {
   constructor(props: CoffeeMakerProps) {
@@ -23,15 +24,15 @@ export class CoffeeMaker extends React.Component<CoffeeMakerProps, CoffeeMakerSt
 
   private fetchInitialData = async (httpClient = HttpClient): Promise<void> => {
     try {
-      const beveragesPromise = httpClient('http://localhost:3003/beverages');
-      const ingredientsPromise = httpClient('http://localhost:3003/stock');
+      const beveragesPromise = httpClient(BEVERAGES_LIST);
+      const ingredientsPromise = httpClient(INGREDIENTS_STOCK_LIST);
 
       const [ beverages, ingredients ] = await Promise.all([ beveragesPromise, ingredientsPromise ]);
 
       this.setState({
         requestStatus: RequestStatus.Completed,
         beveragesToPick: BeverageFactory(beverages, ingredients),
-        ingredientsStock: IngredientsFactory(ingredients),
+        ingredientsStock: StockIngredientsFactory(ingredients),
       });
     } catch (e) {
       this.setState({
@@ -53,18 +54,14 @@ export class CoffeeMaker extends React.Component<CoffeeMakerProps, CoffeeMakerSt
       this.setState({
         ingredientsStock,
       });
-
-      return Promise.resolve();
     } catch(e) {
       this.setState({
         requestStatus: RequestStatus.Failed,
       });
-
-      return Promise.reject();
     }
   };
 
-  private updateBeveragesStatus = (ingredientsStock: IIngredient[] | []) => {
+  private updateBeveragesStatus = (ingredientsStock: StockIngredient[] | []) => {
     const { beveragesToPick } = this.state;
 
     beveragesToPick.forEach((beverage) => {

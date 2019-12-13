@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import {IngredientsProps} from "../interfaces/IngredientsProps";
+import { IngredientsProps } from "../interfaces/IngredientsProps";
 
 export const IngredientsList = (props: IngredientsProps) => (
   <>

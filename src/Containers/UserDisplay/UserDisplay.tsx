@@ -1,11 +1,12 @@
 import * as React from 'react';
-import {OrderDetails} from "../../Components/OrderDetails/OrderDetails";
-import {BeveragesList} from "../../Components/BeveragesList/BeveragesList";
-import {Beverage} from "../../Domain/Beverage/interfaces/Beverage";
-import {UserDisplayProps} from "./interfaces/UserDisplayProps";
+import { OrderDetails } from "../../Components/OrderDetails/OrderDetails";
+import { BeveragesList } from "../../Components/BeveragesList/BeveragesList";
+import { Beverage } from "../../Domain/Beverage/interfaces/Beverage";
+import { UserDisplayProps } from "./interfaces/UserDisplayProps";
 
 export const UserDisplay = ({ updateIngredientsStockData, beveragesToPick }: UserDisplayProps) => {
   const [ pickedBeverage, pickBeverage ] = React.useState<Beverage | null>(null);
+  const returnToList = () => pickBeverage(null);
   const pickBeverageCreator = (beverage: Beverage) => async () => {
     try {
       await updateIngredientsStockData(beverage);
@@ -19,6 +20,7 @@ export const UserDisplay = ({ updateIngredientsStockData, beveragesToPick }: Use
     return (
       <OrderDetails
         pickedBeverage={pickedBeverage}
+        returnToList={returnToList}
       />
     );
   }

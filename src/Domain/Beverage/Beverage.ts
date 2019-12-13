@@ -1,23 +1,22 @@
-import {BeverageData} from "./interfaces/BeverageData";
-import {Beverage as IBeverage} from './interfaces/Beverage';
-import {BeverageIngredientsFactory} from "./BeverageIngredientsFactory";
-import {Ingredient as IIngredient} from "../Ingredient/interfaces/Ingredient";
-import {CurrencyCode} from "../../utils/currencies/interfaces/CurrencyCode";
-import {IngredientData} from "../Ingredient/interfaces/IngredientData";
-import {BeveragePrice} from "./interfaces/BeveragePrice";
+import { BeverageApiData, BeveragePrice } from "./interfaces/BeverageApiData";
+import { Beverage as IBeverage } from './interfaces/Beverage';
+import { BeverageIngredient } from "./interfaces/BeverageIngredient";
+import { CurrencyCode } from "../../Utils/currencies/interfaces/CurrencyCode";
+import { StockIngredient } from "../StockIngredient/interfaces/StockIngredient";
+import { StockIngredientApiData } from "../StockIngredient/interfaces/StockIngredientApiData";
 
 export class Beverage implements IBeverage {
-  public ingredients: IIngredient[];
+  public ingredients: BeverageIngredient[];
   public name: string;
   private id: number;
   public prices: BeveragePrice[];
   public canBeBrewed: boolean;
 
-  constructor({ id, name, ingredients, prices }: BeverageData, ingredientApiData: IngredientData[]) {
+  constructor({ id, name, ingredients, prices }: BeverageApiData, ingredientApiData: StockIngredientApiData[]) {
     this.id = id;
     this.name = name;
     this.prices = prices;
-    this.ingredients = BeverageIngredientsFactory(ingredients, ingredientApiData);
+    this.ingredients = ingredients;
     this.canBeBrewed = this.isBrewable(ingredientApiData);
   }
 
@@ -45,12 +44,12 @@ export class Beverage implements IBeverage {
     }
   };
 
-  private isBrewable = (ingredientsStock: IIngredient[] | []) => {
+  private isBrewable = (ingredientsStock: StockIngredient[] | []) => {
     for (let i = 0; i < this.ingredients.length; i++) {
-      const interatedIngredient = this.ingredients[i];
-      const matchedIngredient = ingredientsStock.find(({ id }) => id === interatedIngredient.id);
+      const iteratedIngredient = this.ingredients[i];
+      const matchedIngredient = ingredientsStock.find(({ id }) => id === iteratedIngredient.id);
 
-      if (matchedIngredient && matchedIngredient.stock >= interatedIngredient.stock) {
+      if (matchedIngredient && matchedIngredient.stock >= iteratedIngredient.amountRequired) {
         continue;
       }
 
@@ -60,7 +59,7 @@ export class Beverage implements IBeverage {
     return true;
   };
 
-  public updateCanBeBrewedStatus = (ingredientsStock: IIngredient[] | []): void => {
+  public updateCanBeBrewedStatus = (ingredientsStock: StockIngredient[] | StockIngredientApiData[] | []): void => {
     this.canBeBrewed = this.isBrewable(ingredientsStock);
   };
 }

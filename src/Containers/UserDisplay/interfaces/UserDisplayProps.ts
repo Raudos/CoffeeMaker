@@ -1,5 +1,4 @@
-import {Beverage, Beverage as IBeverage} from "../../../Domain/Beverage/interfaces/Beverage";
-import {updateIngredientsStockApiResponse} from "../../CoffeeMaker/mocks/updateIngedientsStockApiResponse";
+import { Beverage, Beverage as IBeverage } from "../../../Domain/Beverage/interfaces/Beverage";
 
 export interface UserDisplayProps {
   beveragesToPick: IBeverage[];

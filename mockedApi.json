@@ -2,24 +2,24 @@
   "stock": [
     {
       "id": 1,
-      "name": "Kawa ",
-      "stock": 100
+      "name": "Kawa",
+      "stock": 10
     },
     {
       "id": 2,
       "name": "Mleko",
-      "stock": 100
+      "stock": 6
     },
     {
       "id": 3,
       "name": "Cukier",
-      "stock": 100
+      "stock": 6
     }
   ],
   "beverages": [
     {
       "id": 1,
-      "name": "Super Kawa",
+      "name": "Normalna Kawa",
       "price": [
         {
           "code": "USD",
@@ -33,17 +33,19 @@
       "ingredients": [
         {
           "id": 1,
+          "name": "Kawa",
           "amountRequired": 3
         },
         {
           "id": 2,
+          "name": "Mleko",
           "amountRequired": 2
         }
       ]
     },
     {
       "id": 2,
-      "name": "Normalna Kawa",
+      "name": "Super Kawa",
       "price": [
         {
           "code": "USD",
@@ -57,14 +59,17 @@
       "ingredients": [
         {
           "id": 1,
+          "name": "Kawa",
           "amountRequired": 5
         },
         {
           "id": 2,
+          "name": "Mleko",
           "amountRequired": 2
         },
         {
           "id": 3,
+          "name": "Cukier",
           "amountRequired": 2
         }
       ]

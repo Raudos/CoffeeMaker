@@ -1,8 +1,8 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import {BeverageCardProps} from "./interfaces/BeverageCardProps";
-import {IngredientsList} from "./IngredientsList/IngredientsList";
+import { BeverageCardProps } from "./interfaces/BeverageCardProps";
+import { IngredientsList } from "./IngredientsList/IngredientsList";
 import Col from "react-bootstrap/Col";
 
 

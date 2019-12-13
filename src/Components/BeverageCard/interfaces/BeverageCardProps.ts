@@ -1,4 +1,4 @@
-import {Beverage as IBeverage} from "../../../Domain/Beverage/interfaces/Beverage";
+import { Beverage as IBeverage } from "../../../Domain/Beverage/interfaces/Beverage";
 
 export interface BeverageCardProps {
   beverage: IBeverage;

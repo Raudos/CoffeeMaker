@@ -1,4 +1,4 @@
-import {CurrencyCode} from "./interfaces/CurrencyCode";
+import { CurrencyCode } from "./interfaces/CurrencyCode";
 
 export const getCurrencySuffix = (currencyCode: CurrencyCode) => {
   switch (currencyCode) {

@@ -1,17 +1,27 @@
-import {Ingredient as IIngredient} from "../../../Domain/Ingredient/interfaces/Ingredient";
-import {Beverage} from "../../../Domain/Beverage/interfaces/Beverage";
+import { Beverage } from "../../../Domain/Beverage/interfaces/Beverage";
+import { StockIngredient } from "../../../Domain/StockIngredient/interfaces/StockIngredient";
 
 interface requestData {
   data: {
     beverage: Beverage;
-    ingredientsStock: IIngredient[] | [];
+    ingredientsStock: StockIngredient[] | [];
   };
 }
 
-const updateStockCount = ({ data }: requestData): IIngredient[] => {
-  return [];
+const updateStockCount = ({ data }: requestData): StockIngredient[] => {
+  data.beverage.ingredients.forEach((ingredient) => {
+    const matchedIngredient = data.ingredientsStock.find(({ id }) => id === ingredient.id);
+
+    if (matchedIngredient && ingredient.amountRequired) {
+      matchedIngredient.stock = matchedIngredient.stock - ingredient.amountRequired;
+    } else {
+      throw new Error(`Could not find matching ingredient for id: ${ingredient.id}`);
+    }
+  });
+
+  return data.ingredientsStock;
 };
 
-export const updateIngredientsStockApiResponse = (url: string, requestData: requestData): Promise<IIngredient[]> => {
+export const updateIngredientsStockApiResponse = (url: string, requestData: requestData): Promise<StockIngredient[]> => {
   return Promise.resolve(updateStockCount(requestData));
 };
