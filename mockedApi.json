@@ -1,0 +1,78 @@
+{
+  "stock": [
+    {
+      "id": 1,
+      "name": "Kawa",
+      "stock": 10
+    },
+    {
+      "id": 2,
+      "name": "Mleko",
+      "stock": 6
+    },
+    {
+      "id": 3,
+      "name": "Cukier",
+      "stock": 6
+    }
+  ],
+  "beverages": [
+    {
+      "id": 1,
+      "name": "Normalna Kawa",
+      "price": [
+        {
+          "code": "USD",
+          "cost": 4
+        },
+        {
+          "code": "PLN",
+          "cost": 16
+        }
+      ],
+      "ingredients": [
+        {
+          "id": 1,
+          "name": "Kawa",
+          "amountRequired": 3
+        },
+        {
+          "id": 2,
+          "name": "Mleko",
+          "amountRequired": 2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Super Kawa",
+      "price": [
+        {
+          "code": "USD",
+          "cost": 3
+        },
+        {
+          "code": "PLN",
+          "cost": 12
+        }
+      ],
+      "ingredients": [
+        {
+          "id": 1,
+          "name": "Kawa",
+          "amountRequired": 5
+        },
+        {
+          "id": 2,
+          "name": "Mleko",
+          "amountRequired": 2
+        },
+        {
+          "id": 3,
+          "name": "Cukier",
+          "amountRequired": 2
+        }
+      ]
+    }
+  ]
+}
